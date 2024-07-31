@@ -8,11 +8,13 @@ import Services from "./_component/Services";
 import Shop from "./_component/Shop";
 
 
+
 const HomePage = () => {
   return (
     <div>
      
       <AnimatedSection delay={0.1}>
+    
         <Banner />
       </AnimatedSection>
 

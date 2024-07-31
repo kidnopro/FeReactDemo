@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   name: yup.string().required("Họ và tên là bắt buộc"),
@@ -19,21 +20,42 @@ type FormValues = {
 };
 
 const ContactPage: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
+  const navigate = useNavigate(); // Khai báo useNavigate
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = data => {
-    console.log(data);
-    alert('Gửi thành công,chúng tôi sẽ liên hệ với bạn sớm nhất');
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const formData = new URLSearchParams();
+    formData.append("entry.323050142", data.name); // Thay bằng ID trường tên trong Google Form
+    formData.append("entry.1296660199", data.email); // Thay bằng ID trường email trong Google Form
+    formData.append("entry.1344814193", data.phone); // Thay bằng ID trường số điện thoại trong Google Form
+    formData.append("entry.162458856", data.message); // Thay bằng ID trường lời nhắn trong Google Form
+
+    fetch(
+      "https://docs.google.com/forms/d/e/1FAIpQLSfHhg7NKSJvLnyiLjprM2uAEMtgDrZOGan0oTpm8bHGHNGYTw/formResponse", // URL chính xác để gửi dữ liệu
+      {
+        method: "POST",
+        body: formData,
+        mode: "no-cors",
+      }
+    )
+      .then(() => {
+        alert("Gửi thành công, chúng tôi sẽ liên hệ với bạn sớm nhất");
+        navigate("/"); // Điều hướng về trang home sau khi gửi thành công
+      })
+      .catch((error) => {
+        console.error("Lỗi gửi dữ liệu:", error);
+      });
   };
 
   return (
-     
     <div className="container mx-auto p-8 shadow-md mt-5 mb-5">
-      <h1 className="text-4xl font-bold mb-8  text-indigo-600">
-        Liên Hệ
-      </h1>
+      <h1 className="text-4xl font-bold mb-8 text-indigo-600">Liên Hệ</h1>
 
       {/* Google Map */}
       <div className="w-full mb-8">
@@ -64,7 +86,9 @@ const ContactPage: React.FC = () => {
                 {...register("name")}
               />
               {errors.name && (
-                <p className="mt-1 text-red-500 text-sm">{errors.name.message}</p>
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
@@ -81,7 +105,9 @@ const ContactPage: React.FC = () => {
                 {...register("email")}
               />
               {errors.email && (
-                <p className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -98,7 +124,9 @@ const ContactPage: React.FC = () => {
                 {...register("phone")}
               />
               {errors.phone && (
-                <p className="mt-1 text-red-500 text-sm">{errors.phone.message}</p>
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.phone.message}
+                </p>
               )}
             </div>
 
@@ -114,7 +142,9 @@ const ContactPage: React.FC = () => {
                 {...register("message")}
               ></textarea>
               {errors.message && (
-                <p className="mt-1 text-red-500 text-sm">{errors.message.message}</p>
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.message.message}
+                </p>
               )}
             </div>
 
@@ -129,13 +159,12 @@ const ContactPage: React.FC = () => {
           </form>
         </div>
 
-       
         <div className="w-full lg:w-1/2 mt-8 lg:mt-0 space-y-6">
           <div className="flex items-start space-x-2">
             <FaMapMarkerAlt className="text-indigo-500 w-6 h-6" />
             <div>
               <h2 className="text-xl font-semibold">Địa chỉ</h2>
-              <p>Số 1 Trịnh Văn Bô,Nam Từ Liêm,Hà Nội</p>
+              <p>Số 1 Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
             </div>
           </div>
           <div className="flex items-start space-x-2">
@@ -153,10 +182,13 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
           <div className="flex items-start space-x-2">
-           
             <div>
               <h2 className="text-xl font-semibold">Hỗ Trợ</h2>
-              <p className="text-red-500 font-semibold mt-2">Để được hỗ trợ và trả lời nhanh nhất,quý khách vui lòng nhập đầy đủ thông tin vào Form sau để nhân viên hỗ trợ tốt nhất.Thân ái.</p>
+              <p className="text-red-500 font-semibold mt-2">
+                Để được hỗ trợ và trả lời nhanh nhất, quý khách vui lòng nhập
+                đầy đủ thông tin vào Form sau để nhân viên hỗ trợ tốt nhất. Thân
+                ái.
+              </p>
             </div>
           </div>
         </div>

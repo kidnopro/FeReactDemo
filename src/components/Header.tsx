@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartIcon, Logo, SearchIcon, UserIcon } from "./icons";
 import HeaderTest from "./HeaderTest";
 import { UserButton } from "@clerk/clerk-react";
 import useCart from "@/common/hooks/useCart";
 import axios from "axios";
+import Modal from "@/pages/(website)/home/_component/model";
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(true); // State để điều khiển hiển thị modal
   const { data } = useCart();
-  const navigate = useNavigate(); // Thay đổi để sử dụng useNavigate
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -22,6 +24,10 @@ const Header = () => {
       data?.products.reduce((total, product) => total + product.quantity, 0) ||
       0
     );
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -65,6 +71,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
     </header>
   );
 };
