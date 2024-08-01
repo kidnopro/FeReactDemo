@@ -5,7 +5,7 @@ import { useLocalStorage } from "@/common/hooks/useStorage";
 import { toast } from "@/components/ui/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -139,7 +139,7 @@ const ProductDetail = () => {
                   </button>
                   <button
                     className="products__btn bg-blue-600 text-white"
-                    onClick={() => 
+                    onClick={() =>
                       mutate({
                         productId: data._id,
                         quantity: quantity,
@@ -148,7 +148,10 @@ const ProductDetail = () => {
                   >
                     Thêm Vào Giỏ
                   </button>
-                  <button className="products__btn  bg-blue-600 text-white" onClick={handleBuyNow}>
+                  <button
+                    className="products__btn  bg-blue-600 text-white"
+                    onClick={handleBuyNow}
+                  >
                     Mua Ngay
                   </button>
                 </div>
@@ -202,9 +205,7 @@ const ProductDetail = () => {
           <div className="container">
             <h1 className="related-product__title">Có Thể Bạn Quan Tâm</h1>
             <RelatedProduct id={data.category._id} />
-            <div className="btn-showmore">
-              <button className="btn-showmore__action">Xem Thêm</button>
-            </div>
+            
           </div>
         </section>
         <hr className="hr" />

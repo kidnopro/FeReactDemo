@@ -11,9 +11,9 @@ const Services = () => {
                                 className="service__image"
                             />
                             <div className="service-info">
-                                <h4 className="service__name">High Quality</h4>
+                                <h4 className="service__name">Chất Lượng Cao</h4>
                                 <p className="service__description">
-                                    crafted from top materials
+                                Được gia công từ vật liệu chất lượng 
                                 </p>
                             </div>
                         </div>
@@ -26,10 +26,10 @@ const Services = () => {
                             />
                             <div className="service-info">
                                 <h4 className="service__name">
-                                    Warranty Protection
+                                    Bảo Hành
                                 </h4>
                                 <p className="service__description">
-                                    Over 2 years
+                                    Bảo hành lên đến 24 tháng
                                 </p>
                             </div>
                         </div>
@@ -41,9 +41,9 @@ const Services = () => {
                                 className="service__image"
                             />
                             <div className="service-info">
-                                <h4 className="service__name">Free Shipping</h4>
+                                <h4 className="service__name">Miễn Phí Vận Chuyển</h4>
                                 <p className="service__description">
-                                    Order over 150 $
+                                    Từ sản phẩm 550$
                                 </p>
                             </div>
                         </div>
@@ -56,14 +56,14 @@ const Services = () => {
                             />
                             <div className="service-info">
                                 <h4 className="service__name">
-                                    24 / 7 Support
+                                    24 / 7 Hỗ Trợ
                                 </h4>
                                 <p className="service__description">
-                                    Dedicated support
+                                    Hỗ Trợ Chuyên Dụng
                                 </p>
                             </div>
                         </div>
-                        {/*End service-item*/}
+                      
                     </div>
                 </div>
             </section>
