@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
-// Define Product type
 interface Product {
   _id: string;
   name: string;
@@ -41,7 +40,7 @@ const SearchPage: React.FC = () => {
         );
         setResults(response.data);
       } catch (err) {
-        setError("An error occurred while searching.");
+        setError("Sản phẩm bạn tìm không tồn tại!");
         console.error("Search error:", err);
       } finally {
         setLoading(false);

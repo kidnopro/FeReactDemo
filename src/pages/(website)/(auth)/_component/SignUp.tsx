@@ -56,7 +56,7 @@ const SignUp = () => {
                 title: "Đăng ký thành công!",
                 variant: "success",
             });
-            navigate("/sign-in"); // Chuyển hướng đến trang đăng nhập
+            
             return data;
         },
         onError: (error) => {
