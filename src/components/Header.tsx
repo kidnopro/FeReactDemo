@@ -12,10 +12,10 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // State để điều khiển hiển thị menu người dùng
   const { data } = useCart();
   const navigate = useNavigate();
-  const { user, isSignedIn, signOut } = useUser(); // Lấy thông tin người dùng từ Clerk
+  const { user, isSignedIn, signOut } = useUser(); 
 
-  console.log("User:", user);
-  console.log("Is Signed In:", isSignedIn);
+  // console.log("User:", user);
+  // console.log("Is Signed In:", isSignedIn);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
